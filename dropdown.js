@@ -1,4 +1,5 @@
-function dropdown() {
+function dropdown(params={}) {
+  this.params = params;
 
   this.map = function(arr, funct){
     var newArr = []
@@ -44,11 +45,11 @@ function dropdown() {
   this.slide = function(e){
     var dropdown = e.target.parentElement
     if(dropdown.classList.contains('active')){
-      slideUp(e);
-      removeActive(dropdown)
+      this.slideUp(e);
+      this.removeActive(dropdown)
     }else{
-      slideDown(e);
-      addActive(dropdown)
+      this.slideDown(e);
+      this.addActive(dropdown)
     }
   }
 
@@ -61,7 +62,7 @@ function dropdown() {
       document.addEventListener( "DOMContentLoaded", function(){
         document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
         return funct(self);
-      }, false );
+      }.bind(this), false );
 
       // If IE event model is used
     } else if ( document.attachEvent ) {
@@ -92,22 +93,35 @@ function dropdown() {
           d.onreadystatechange = null;
           return init(self);
         }
-      };
+      }.bind(this);
 
     } else {
-      window.addEventListener('load', funct, false);
+      window.addEventListener('load', function() {
+        funct(self);
+      }.bind(this), false);
     }
   };
 
-  this.init = function(self) {
-    self.dropdown = document.getElementsByClassName('dropdown');
-    self.map(dropdown, function(el){
-      el.addEventListener('click', slide);
+  this.setTransition = function(el) {
+    var transitionString = "top";
+    transitionString += ' ' + (el.getAttribute('easing') || this.params.easing || 'ease');
+    transitionString += ' ' + (el.getAttribute('speed') || this.params.speed || '1s');
+    this.map(el.children, function(el) {
+      el.style.transition = transitionString;
     });
+  };
+
+  this.init = function(self) {
+    self.dropdown = self.params.element || document.getElementsByClassName('dropdown')[0];
+    self.setTransition(self.dropdown);
+    self.dropdown.addEventListener('click', function(e) {
+      self.slide(e);
+    }.bind(self));
     return self;
   }
 
   return this.ready(this.init);
 }
 
-dropdown();
+new dropdown();
+new dropdown({ element: document.getElementById('dropdown'), easing: 'none', speed: '0.5s' });

@@ -29,7 +29,16 @@
       <button id="submit" type="submit">Submit</button>
     </form>
 
-    <ul class="dropdown">
+    <ul class="dropdown" easing="ease-out" speed="5s">
+      <li class="active" data-value=""></li>
+      <li data-value="A">A</li>
+      <li data-value="B">B</li>
+      <li data-value="C">C</li>
+      <li data-value="D">D</li>
+      <input class="dropdown-input" type="hidden" name="dropdown" />
+    </ul>
+
+    <ul class="dropdown" id="dropdown">
       <li class="active" data-value=""></li>
       <li data-value="A">A</li>
       <li data-value="B">B</li>
