@@ -19,3 +19,37 @@
   padding: 3px 0px 3px 3px;
   margin: 5px 1px 3px 0px;
 }
+
+ul.dropdown {
+  list-style: none;
+  height: 40px;
+  width: 100%;
+  border: 2px solid grey;
+  position: relative;
+  padding: 0;
+}
+
+ul.dropdown li {
+  height: 40px;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background: white;
+  border: 1px solid grey;
+  transition: all 1s ease;
+}
+
+ul.dropdown li.active {
+  z-index: 50;
+}
+
+ul.dropdown.active li {
+  position: relative;
+}
+
+ul.dropdown.active li.active {
+  background: blue;
+  color: white;
+}
