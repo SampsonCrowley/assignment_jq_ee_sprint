@@ -1,3 +1,5 @@
+
+
 function ElementObject(el, constraints){
   var self = this;
   this.el = el;
@@ -60,7 +62,14 @@ function ElementObject(el, constraints){
       this.el.parentNode.classList.remove('error');
     }
   }
-  this.el.addEventListener('keyup', this.listener);
+  this.setListener = function() {
+    this.el.addEventListener('keyup', this.listener);
+  }
+  this.removeListener = function() {
+    this.el.removeEventListener('keyup', this.listener);
+  }
+
+  this.setListener()
 }
 
 function passwordMatches(password, passwordConfirmation) {
@@ -80,7 +89,7 @@ var formValidation = {
     title: {
       min: 4,
       max: 32
-    }
+    },
   },
 }
 
@@ -94,10 +103,10 @@ formValidation.passwordConfirmation = new ElementObject(document.getElementById(
 
 formValidation.passwordCheck = function() {
   var self = this;
-  this.password.el.removeEventListener('keyup', this.listener);
-  this.passwordConfirmation.el.removeEventListener('keyup', this.listener);
+  this.password.removeListener();
+  this.passwordConfirmation.removeListener();
 
-  this.password.listener = this.password.el.addEventListener('keyup', function() {
+  this.password.listener = function() {
     var valid = passwordMatches(self.password.el, self.passwordConfirmation.el);
     if (valid) {
       if (self.passwordConfirmation.getCount() === 0) {
@@ -108,9 +117,9 @@ formValidation.passwordCheck = function() {
       self.password.addError();
       self.password.setCounterText("Password must match confirmation.");
     }
-  });
+  };
 
-  this.passwordConfirmation.listener = this.passwordConfirmation.el.addEventListener('keyup', function() {
+  this.passwordConfirmation.listener = function() {
     var valid = passwordMatches(self.password.el, self.passwordConfirmation.el);
     if (valid) {
       self.password.displayLimits();
@@ -119,7 +128,33 @@ formValidation.passwordCheck = function() {
       self.passwordConfirmation.addError();
       self.passwordConfirmation.setCounterText("Confirmation must match password.");
     }
-  });
+  }
+
+  this.password.setListener();
+  this.passwordConfirmation.setListener()
 }
+
+formValidation.submitValid = function(e){
+
+  var form = e.target;
+  var children = form.children
+  var invalid = false;
+  for(prop in formValidation){
+    if(formValidation[prop].listener){
+      formValidation[prop].listener();
+    }
+  }
+  for(i = 0; i < children.length; i++){
+    if(children[i].classList.contains('error')){
+      invalid = true;
+    }
+  }
+  if(invalid){
+    e.preventDefault()
+  }
+}
+
+form = document.getElementById('form');
+form.addEventListener('submit', formValidation.submitValid);
 
 formValidation.passwordCheck();
