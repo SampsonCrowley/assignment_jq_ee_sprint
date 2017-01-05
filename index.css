@@ -1,3 +1,21 @@
 .hidden {
   display: none!important;
 }
+
+.error {
+  color: red;
+}
+
+.error input, .error textarea,
+.error input:focus, .error textarea:focus {
+  border: 2px solid red;
+}
+
+
+.error input:focus, .error textarea:focus {
+  -moz-box-shadow: 0 0 5px red;
+  -webkit-box-shadow: 0 0 5px red;
+  box-shadow: 0 0 5px red;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+}
