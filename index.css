@@ -1,3 +1,6 @@
+*{
+  box-sizing: border-box;
+}
 .hidden {
   display: none!important;
 }
@@ -23,13 +26,15 @@
 ul.dropdown {
   list-style: none;
   height: 40px;
-  width: 100%;
-  border: 2px solid grey;
+  border: none;
   position: relative;
   padding: 0;
+  font-size: 20px;
+  line-height: 1;
 }
 
 ul.dropdown li {
+  padding:5px;
   height: 40px;
   width: 100%;
   position: absolute;
@@ -37,7 +42,7 @@ ul.dropdown li {
   top: 0;
   left: 0;
   background: white;
-  border: 1px solid grey;
+  border: 1px solid #ccc;
   transition: all 1s ease;
 }
 
@@ -45,11 +50,10 @@ ul.dropdown li.active {
   z-index: 50;
 }
 
-ul.dropdown.active li {
-  position: relative;
+ul.dropdown.active li:hover{
+  background: #eee;
 }
 
 ul.dropdown.active li.active {
-  background: blue;
-  color: white;
+  background: #bfe4f4;
 }

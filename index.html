@@ -5,6 +5,7 @@
   <body>
 
     <form id="form" action="">
+
       <label for="password">
         Password <span id="password-counter" class="hidden"></span><br>
         <input type="password" id="password" name="password" value="">
@@ -29,16 +30,17 @@
     </form>
 
     <ul class="dropdown">
-      <li class="active"></li>
-      <li>A</li>
-      <li>B</li>
-      <li>C</li>
-      <li>D</li>
+      <li class="active" data-value=""></li>
+      <li data-value="A">A</li>
+      <li data-value="B">B</li>
+      <li data-value="C">C</li>
+      <li data-value="D">D</li>
+      <input class="dropdown-input" type="hidden" name="dropdown" />
     </ul>
 
   </body>
 
   <script type="text/javascript" src="form_validation.js"></script>
   <script type="text/javascript" src="dropdown.js"></script>
-  
+
 </html>
