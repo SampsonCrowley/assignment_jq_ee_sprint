@@ -31,6 +31,7 @@ ul.dropdown {
   padding: 0;
   font-size: 20px;
   line-height: 1;
+  display: block;
 }
 
 ul.dropdown li {
@@ -55,4 +56,32 @@ ul.dropdown.active li:hover{
 
 ul.dropdown.active li.active {
   background: #bfe4f4;
+}
+
+img {
+  max-width: 100%;
+  max-width: 500px;
+}
+
+#image-hover-top,
+#image-hover-right,
+#image-hover-bottom,
+#image-hover-left {
+  position: fixed;
+  display: none;
+  border: 2px solid #333;
+  background: transparent!important;
+  z-index: 1000px;
+}
+
+#image-hover-top,
+#image-hover-bottom
+ {
+  width: 100px;
+  height: 1px;
+}
+#image-hover-right,
+#image-hover-left {
+  width: 1px;
+  height: 100px;
 }
