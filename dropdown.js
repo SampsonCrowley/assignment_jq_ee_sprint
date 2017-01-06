@@ -82,53 +82,53 @@ function Dropdown(params={}) {
   }
   this.init();
 }
-Dropdown.ready = function(params) {
-  // Mozilla, Opera and webkit nightlies currently support this event
-
-  if ( document.addEventListener ) {
-    // Use the handy event callback
-    document.addEventListener( "DOMContentLoaded", function(){
-      document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
-      return new Dropdown(params);
-    }, false );
-
-    // If IE event model is used
-  } else if ( document.attachEvent ) {
-    var d = window.document;
-    var done = false;
-    // only fire once
-    var init = function () {
-      if (!done) {
-        done = true;
-        return new Dropdown(params);
-      }
-    };
-    // polling for no errors
-    (function () {
-      try {
-        // throws errors until after ondocumentready
-        d.documentElement.doScroll('left');
-      } catch (e) {
-        setTimeout(arguments.callee, 50);
-        return;
-      }
-      // no errors, fire
-      return init();
-    })();
-    // trying to always fire before onload
-    d.onreadystatechange = function() {
-      if (d.readyState == 'complete') {
-        d.onreadystatechange = null;
-        return init();
-      }
-    };
-
-  } else {
-    window.addEventListener('load', function() {
-      new Dropdown(params);
-    }, false);
-  }
-};
+// Dropdown.ready = function(params) {
+//   // Mozilla, Opera and webkit nightlies currently support this event
+//
+//   if ( document.addEventListener ) {
+//     // Use the handy event callback
+//     document.addEventListener( "DOMContentLoaded", function(){
+//       document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
+//       return new Dropdown(params);
+//     }, false );
+//
+//     // If IE event model is used
+//   } else if ( document.attachEvent ) {
+//     var d = window.document;
+//     var done = false;
+//     // only fire once
+//     var init = function () {
+//       if (!done) {
+//         done = true;
+//         return new Dropdown(params);
+//       }
+//     };
+//     // polling for no errors
+//     (function () {
+//       try {
+//         // throws errors until after ondocumentready
+//         d.documentElement.doScroll('left');
+//       } catch (e) {
+//         setTimeout(arguments.callee, 50);
+//         return;
+//       }
+//       // no errors, fire
+//       return init();
+//     })();
+//     // trying to always fire before onload
+//     d.onreadystatechange = function() {
+//       if (d.readyState == 'complete') {
+//         d.onreadystatechange = null;
+//         return init();
+//       }
+//     };
+//
+//   } else {
+//     window.addEventListener('load', function() {
+//       new Dropdown(params);
+//     }, false);
+//   }
+// };
 
 new Dropdown();
 new Dropdown({ element: document.getElementById('dropdown'), easing: 'none', speed: '0.5s' });
